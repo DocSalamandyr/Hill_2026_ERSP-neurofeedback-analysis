@@ -1,0 +1,11 @@
+ERD-P2 Correlation at C3 (session-averaged per subject)
+============================================================
+
+All subjects (n=40):
+  r = 0.150, p = 0.3556
+
+Active subjects only (n=24):
+  r = -0.059, p = 0.7856
+
+Interpretation: ERD and P2 are not significantly correlated,
+supporting their characterization as dissociable mechanisms.

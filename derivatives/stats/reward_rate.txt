@@ -1,0 +1,14 @@
+Reward Rate Equivalence Across Groups
+============================================================
+
+Grand mean: 618 ± 45 events/session
+
+Per-group means (events/session):
+  c3_smr    : 613 ± 43 (n=8)
+  c3_beta   : 630 ± 61 (n=8)
+  c4_smr    : 619 ± 43 (n=8)
+  sham      : 613 ± 32 (n=16)
+
+One-way ANOVA: F(3,36) = 0.291, p = 0.8320
+
+Reward rates did not differ significantly across groups.
