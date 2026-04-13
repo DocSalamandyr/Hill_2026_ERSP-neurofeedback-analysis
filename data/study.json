@@ -1,0 +1,1111 @@
+[
+  {
+    "subject_id": "101",
+    "group": "c4_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {},
+    "notes": "Previously excluded (protocol spreadsheet: 'omitted for behavioral reasons'). Re-included: BFB data quality normal, 610-628 events/session. LANT-specific exclusion does not apply to EEG/ERSP.",
+    "stage": "raw",
+    "known_bad_channels": [
+      "FC6",
+      "FT8",
+      "P2",
+      "T7"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "102",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-06-18",
+      "3": "2010-06-20",
+      "5": "2010-06-22",
+      "6": "2010-07-22"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF4",
+      "F2",
+      "FC6",
+      "Fz",
+      "P10",
+      "P2",
+      "P9",
+      "T7",
+      "T8"
+    ],
+    "interpolated_channels_original": [
+      "F8",
+      "Fz",
+      "T3",
+      "T4"
+    ]
+  },
+  {
+    "subject_id": "103",
+    "group": "c3_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-04-24",
+      "3": "2010-04-26",
+      "5": "2010-04-28",
+      "6": "2010-06-01"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "P1",
+      "P2",
+      "P5",
+      "P6",
+      "P8",
+      "P9",
+      "T7",
+      "TP7"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "104",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-15",
+      "3": "2010-05-17",
+      "5": "2010-05-19",
+      "6": "2010-06-20"
+    },
+    "notes": "Resting session 5 is EDF (16-bit, harmonized)",
+    "stage": "raw",
+    "known_bad_channels": [
+      "O1",
+      "P10",
+      "P8",
+      "PO3"
+    ],
+    "interpolated_channels_original": [
+      "O1",
+      "T6"
+    ]
+  },
+  {
+    "subject_id": "105",
+    "group": "c3_beta",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-04-28",
+      "3": "2010-04-29",
+      "5": "2010-04-30",
+      "6": "2010-06-04"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "CP1",
+      "F2",
+      "F6",
+      "FC2",
+      "FC3",
+      "FCz",
+      "FT8",
+      "Fz",
+      "P2",
+      "PO4"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "106",
+    "group": "c3_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-23",
+      "3": "2010-05-25",
+      "5": "2010-05-27",
+      "6": "2010-06-24"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "Cz",
+      "Fpz",
+      "P2",
+      "P4",
+      "PO4"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "107",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-23",
+      "3": "2010-05-25",
+      "5": "2010-05-27",
+      "6": "2010-06-24"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "P2",
+      "P9",
+      "PO4"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "108",
+    "group": "c3_beta",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-04-27",
+      "3": "2010-04-29",
+      "5": "2010-05-01",
+      "6": "2010-05-29"
+    },
+    "notes": "BFB session 3 corrupt (server-verified)",
+    "stage": "raw",
+    "known_bad_channels": [
+      "F4",
+      "FC1",
+      "FC5",
+      "FT7",
+      "Iz",
+      "O2",
+      "P2",
+      "PO4",
+      "PO8",
+      "TP7"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "109",
+    "group": "c3_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-04-26",
+      "3": "2010-04-28",
+      "5": "2010-04-30",
+      "6": "2010-05-31"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C5",
+      "C6",
+      "CP4",
+      "CP5",
+      "F4",
+      "F6",
+      "Fz",
+      "Iz",
+      "P10",
+      "P2",
+      "P4",
+      "P6",
+      "P7",
+      "P8",
+      "T7",
+      "T8",
+      "TP7",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "110",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {},
+    "notes": "BFB session 5 corrupt (header-only 20K, unrecoverable). Included with S1/S3/S6 only. Previously excluded per LANT protocol spreadsheet.",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C2",
+      "Cz",
+      "F8",
+      "FC4",
+      "FC6",
+      "FT8",
+      "Fc6",
+      "Fpz",
+      "Iz",
+      "O1",
+      "O2",
+      "P1",
+      "P10",
+      "P3",
+      "P4",
+      "P6",
+      "P7",
+      "P8",
+      "P9",
+      "PO4",
+      "PO8",
+      "Poz",
+      "T7",
+      "TP8"
+    ],
+    "interpolated_channels_original": [
+      "Cz",
+      "O2",
+      "P3",
+      "P4",
+      "T6"
+    ]
+  },
+  {
+    "subject_id": "111",
+    "group": "c3_beta",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-09",
+      "3": "2010-05-11",
+      "5": "2010-05-13",
+      "6": "2010-06-09"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "P2",
+      "P4",
+      "P8",
+      "T7"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "112",
+    "group": "c3_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-10",
+      "3": "2010-05-12",
+      "5": "2010-05-14",
+      "6": "2010-06-11"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C3",
+      "C5",
+      "CP5",
+      "F3",
+      "FC1",
+      "FT7",
+      "Fp2",
+      "Fpz",
+      "Iz",
+      "O1",
+      "P3",
+      "P5",
+      "PO4",
+      "Poz",
+      "T7",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "113",
+    "group": "c4_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-16",
+      "3": "2010-05-18",
+      "5": "2010-05-20",
+      "6": "2010-06-21"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "FC4",
+      "FT8",
+      "Fpz",
+      "Iz",
+      "O1",
+      "P2",
+      "P3",
+      "PO4",
+      "Poz",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "114",
+    "group": "c3_beta",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-05",
+      "3": "2010-05-07",
+      "5": "2010-05-09",
+      "6": "2010-06-14"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "FT8",
+      "Fz",
+      "P2",
+      "P9",
+      "PO4",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "115",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-05",
+      "3": "2010-05-07",
+      "5": "2010-05-09",
+      "6": "2010-06-05"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "F7",
+      "F8",
+      "FT8",
+      "P2",
+      "P7",
+      "P9",
+      "PO3",
+      "T7",
+      "T8",
+      "TP7"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "116",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-28",
+      "3": "2010-05-30",
+      "5": "2010-06-01",
+      "6": "2010-06-27"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "FT7",
+      "Oz",
+      "P2",
+      "P9",
+      "POz"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "117",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-04-30",
+      "3": "2010-05-02",
+      "5": "2010-05-04",
+      "6": "2010-06-01"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C1",
+      "F3",
+      "FC2",
+      "FC4",
+      "FPz",
+      "FT7",
+      "Fz",
+      "Iz",
+      "T7",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "118",
+    "group": "c3_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-24",
+      "3": "2010-05-26",
+      "5": "2010-05-28",
+      "6": "2010-06-28"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C3",
+      "FC1",
+      "FC3",
+      "FCz",
+      "P2",
+      "P9",
+      "T7",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "119",
+    "group": "c4_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-06",
+      "3": "2010-05-08",
+      "5": "2010-05-10",
+      "6": "2010-06-13"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF3",
+      "C4",
+      "F7",
+      "FT7",
+      "P1",
+      "P2",
+      "PO3",
+      "PO4",
+      "T7",
+      "T8",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "120",
+    "group": "c3_beta",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-31",
+      "3": "2010-06-02",
+      "5": "2010-06-28",
+      "6": "2010-06-04"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "FT7",
+      "P2",
+      "T7"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "121",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-19",
+      "3": "2010-05-21",
+      "5": "2010-05-23",
+      "6": "2010-06-22"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C4",
+      "C6",
+      "F7",
+      "FC2",
+      "FC6",
+      "FT8",
+      "P10",
+      "P2",
+      "P7",
+      "P9",
+      "PO4",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "122",
+    "group": "c4_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-18",
+      "3": "2010-05-20",
+      "5": "2010-05-22",
+      "6": "2010-06-23"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "F6",
+      "F8",
+      "FT7",
+      "P2",
+      "T7",
+      "T8",
+      "TP7",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "123",
+    "group": "c3_beta",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-08",
+      "3": "2010-05-10",
+      "5": "2010-05-12",
+      "6": "2010-06-09"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C1",
+      "F4",
+      "F6",
+      "FC6",
+      "FT8",
+      "Iz",
+      "P2",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "124",
+    "group": "c3_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-06",
+      "3": "2010-05-08",
+      "5": "2010-05-10",
+      "6": "2010-06-08"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "FT8",
+      "Fpz",
+      "Iz",
+      "P1",
+      "P10",
+      "P2",
+      "P7",
+      "P8",
+      "P9",
+      "TP7"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "125",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-11",
+      "3": "2010-05-13",
+      "5": "2010-05-15",
+      "6": "2010-06-11"
+    },
+    "notes": "BFB session 5 truncated (~1/3 size)",
+    "stage": "raw",
+    "known_bad_channels": [
+      "F8",
+      "FC1",
+      "FC6",
+      "FT7",
+      "FT8",
+      "Fz",
+      "Iz",
+      "Oz",
+      "P10",
+      "P2",
+      "P9",
+      "PO3",
+      "PO4",
+      "Pz",
+      "TP7"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "126",
+    "group": "c3_beta",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-14",
+      "3": "2010-05-16",
+      "5": "2010-05-19",
+      "6": "2010-06-15"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF3",
+      "AF4",
+      "F6",
+      "F7",
+      "FT8",
+      "Fp2",
+      "O1",
+      "P10",
+      "P2",
+      "P8",
+      "P9",
+      "PO4",
+      "T7",
+      "T8",
+      "TP7",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "127",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-27",
+      "3": "2010-05-29",
+      "5": "2010-05-31",
+      "6": "2010-06-27"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF4",
+      "Afz",
+      "CPz",
+      "F6",
+      "F8",
+      "FT8",
+      "Fp2",
+      "Fpz",
+      "Iz",
+      "O2",
+      "P10",
+      "P2",
+      "P6",
+      "Poz",
+      "T7",
+      "T8",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "128",
+    "group": "c4_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-11",
+      "3": "2010-05-13",
+      "5": "2010-05-15",
+      "6": "2010-06-11"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF4",
+      "C2",
+      "C6",
+      "CP5",
+      "F7",
+      "F8",
+      "Iz",
+      "Oz",
+      "P2",
+      "P3",
+      "P8",
+      "PO4"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "129",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-18",
+      "3": "2010-05-20",
+      "5": "2010-05-22",
+      "6": "2010-06-21"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF3",
+      "F4",
+      "F7",
+      "FT7",
+      "FT8",
+      "Fp2",
+      "O2",
+      "P10",
+      "P2",
+      "P5",
+      "PO4",
+      "T7",
+      "T8",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "130",
+    "group": "c3_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-24",
+      "3": "2010-05-26",
+      "5": "2010-05-28",
+      "6": "2010-06-27"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "Iz",
+      "Oz",
+      "P10",
+      "P2",
+      "P9",
+      "PO4",
+      "Poz",
+      "T7",
+      "T8",
+      "TP7",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "131",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-14",
+      "3": "2010-05-16",
+      "5": "2010-05-19",
+      "6": "2010-06-16"
+    },
+    "notes": "BFB session 3 corrupt (server-verified)",
+    "stage": "raw",
+    "known_bad_channels": [
+      "CP5",
+      "F6",
+      "FCz",
+      "FT7",
+      "P10",
+      "P2",
+      "P5",
+      "P7",
+      "P9",
+      "PO4",
+      "PO7",
+      "T7",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "132",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-23",
+      "3": "2010-05-25",
+      "5": "2010-05-27",
+      "6": "2010-06-28"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF4",
+      "CP5",
+      "F2",
+      "F4",
+      "F7",
+      "FT7",
+      "FT8",
+      "Fpz",
+      "Iz",
+      "P5",
+      "P7",
+      "P9",
+      "T7",
+      "T8",
+      "TP7",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "133",
+    "group": "c3_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-08",
+      "3": "2010-05-10",
+      "5": "2010-05-12",
+      "6": "2010-06-10"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF4",
+      "C1",
+      "CPz",
+      "Cz",
+      "F2",
+      "F7",
+      "F8",
+      "FT7",
+      "FT8",
+      "Fp2",
+      "Fpz",
+      "Iz",
+      "P1",
+      "P10",
+      "P7",
+      "PO4",
+      "T7",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "134",
+    "group": "c4_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-02",
+      "3": "2010-05-04",
+      "5": "2010-05-06",
+      "6": "2010-06-03"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF7",
+      "F2",
+      "F4",
+      "F6",
+      "F8",
+      "FCz",
+      "FT7",
+      "FT8",
+      "P1",
+      "P10",
+      "P2",
+      "P9",
+      "PO4",
+      "T7",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "135",
+    "group": "c3_beta",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-17",
+      "3": "2010-05-19",
+      "5": "2010-05-21",
+      "6": "2010-06-29"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C1",
+      "C5",
+      "C6",
+      "CP6",
+      "F7",
+      "FC5",
+      "FC6",
+      "FT7",
+      "FT8",
+      "P10",
+      "P2",
+      "PO4",
+      "T7",
+      "T8",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "136",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {},
+    "notes": "Previously excluded per LANT protocol spreadsheet ('omitted'). Re-included: all 4 BFB sessions present with normal event counts.",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C4",
+      "C5",
+      "C6",
+      "CP4",
+      "CP5",
+      "CP6",
+      "F5",
+      "F6",
+      "F8",
+      "P10",
+      "P4",
+      "P7",
+      "P8",
+      "P9",
+      "PO3",
+      "PO4",
+      "T7",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "137",
+    "group": "c4_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-11",
+      "3": "2010-05-13",
+      "5": "2010-05-15",
+      "6": "2010-06-15"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF3",
+      "AF4",
+      "C4",
+      "F6",
+      "F8",
+      "FT7",
+      "P2",
+      "P7",
+      "P9",
+      "PO7",
+      "T7",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "138",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {},
+    "notes": "Previously excluded per LANT protocol spreadsheet ('omitted'). Re-included: all 4 BFB sessions present with normal event counts. Resting session 6 is EDF (16-bit, harmonized).",
+    "stage": "raw",
+    "known_bad_channels": [
+      "C6",
+      "P1",
+      "P2",
+      "P5",
+      "P6",
+      "P8",
+      "P9",
+      "PO4",
+      "T7",
+      "T8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "139",
+    "group": "c4_smr",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-05-13",
+      "3": "2010-05-15",
+      "5": "2010-05-17",
+      "6": "2010-06-16"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [
+      "AF3",
+      "AF4",
+      "Afz",
+      "C5",
+      "C6",
+      "Cz",
+      "F8",
+      "FT8",
+      "Iz",
+      "P10",
+      "P2",
+      "P4",
+      "P7",
+      "P9",
+      "PO4",
+      "T7",
+      "T8",
+      "TP8"
+    ],
+    "interpolated_channels_original": []
+  },
+  {
+    "subject_id": "140",
+    "group": "sham",
+    "excluded": false,
+    "exclusion_reason": "",
+    "session_dates": {
+      "1": "2010-06-01",
+      "3": "2010-06-03",
+      "5": "2010-06-05",
+      "6": "2010-06-25"
+    },
+    "notes": "",
+    "stage": "raw",
+    "known_bad_channels": [],
+    "interpolated_channels_original": []
+  }
+]
