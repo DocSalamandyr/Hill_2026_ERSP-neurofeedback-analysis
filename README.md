@@ -29,6 +29,13 @@ tools/                     Analysis library
   viz/                     All figure-generation code
 data/
   study.json               Group assignments and session metadata (no PII)
+derivatives/               Derived data (~215 MB, sufficient for full reproduction)
+  101/                     Per-subject folders (101–140)
+    ersp/                  ERSP matrices (h5) — one per session
+    erp/                   ERP averages (h5) — one per session
+    resting/               Resting-state PSD (h5) — EC/EO pre/post per session
+  stats/                   Group-level statistical outputs
+  pipeline_trial_log.tsv   Trial counts per subject × session
 ```
 
 ## Setup
@@ -87,8 +94,9 @@ Delorme (2023). See manuscript §3.5 and Supplementary S7 for details.
 ## Data availability
 
 Derived data (ERSP matrices, ERP averages, resting-state PSD, and
-statistical outputs; ~215 MB) are deposited at [OSF URL]. These files
-are sufficient to reproduce all statistics and figures in the paper.
+statistical outputs; ~215 MB) are included in the `derivatives/`
+directory of this repository. These files are sufficient to reproduce
+all statistics and figures in the paper without access to raw EEG.
 
 Raw EEG recordings (BioSemi BDF, ~36 GB) are available from the
 corresponding author subject to a data use agreement. The data were

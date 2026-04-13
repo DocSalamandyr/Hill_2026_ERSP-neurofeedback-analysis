@@ -1,0 +1,6 @@
+Retention Contrasts: Session 5 → Session 6 (paired t-tests)
+============================================================
+
+Retention S5→S6 c3_smr: d=0.129 [-0.567, 0.825], p=0.7256, p_adj=0.7780, BF01=2.81
+Retention S5→S6 c3_beta: d=-0.351 [-1.065, 0.363], p=0.3533, p_adj=0.7780, BF01=2.01
+Retention S5→S6 c4_smr: d=-0.104 [-0.798, 0.591], p=0.7780, p_adj=0.7780, BF01=2.87

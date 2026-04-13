@@ -1,0 +1,27 @@
+LME Omnibus: Group × Session on ERD at C3
+Formula: erd ~ C(group) * C(session)
+AIC=nan  BIC=nan
+n_obs=157  n_subjects=40
+
+Fixed effects:
+  Intercept                                           β=-1.2598  SE=0.1427  p=0.0000
+  C(group)[T.c3_smr]                                  β= 0.4375  SE=0.2018  p=0.0302
+  C(group)[T.c4_smr]                                  β= 0.3769  SE=0.2018  p=0.0618
+  C(group)[T.sham]                                    β= 0.6717  SE=0.1748  p=0.0001
+  C(session)[T.3]                                     β= 0.1230  SE=0.1573  p=0.4343
+  C(session)[T.5]                                     β=-0.0129  SE=0.1507  p=0.9319
+  C(session)[T.6]                                     β= 0.0884  SE=0.1507  p=0.5577
+  C(group)[T.c3_smr]:C(session)[T.3]                  β=-0.1514  SE=0.2178  p=0.4869
+  C(group)[T.c4_smr]:C(session)[T.3]                  β=-0.1745  SE=0.2178  p=0.4231
+  C(group)[T.sham]:C(session)[T.3]                    β=-0.1995  SE=0.1912  p=0.2966
+  C(group)[T.c3_smr]:C(session)[T.5]                  β=-0.0352  SE=0.2132  p=0.8688
+  C(group)[T.c4_smr]:C(session)[T.5]                  β=-0.2422  SE=0.2132  p=0.2557
+  C(group)[T.sham]:C(session)[T.5]                    β=-0.1227  SE=0.1859  p=0.5093
+  C(group)[T.c3_smr]:C(session)[T.6]                  β=-0.2041  SE=0.2132  p=0.3382
+  C(group)[T.c4_smr]:C(session)[T.6]                  β=-0.2958  SE=0.2132  p=0.1653
+  C(group)[T.sham]:C(session)[T.6]                    β=-0.0572  SE=0.1846  p=0.7565
+
+Partial eta-squared (mixed ANOVA):
+  group                 ηp²=0.3789
+  session               ηp²=0.0483
+  Interaction           ηp²=0.0508

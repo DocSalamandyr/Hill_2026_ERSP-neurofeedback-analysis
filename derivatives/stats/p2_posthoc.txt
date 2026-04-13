@@ -1,0 +1,9 @@
+P2 Post-Hoc Contrasts at C3 (session-averaged mean amplitude)
+============================================================
+
+Active (pooled) vs Sham: d=-0.471 [-1.112, 0.170], p=0.1449, p_adj=0.2173, BF01=2.12
+C3 SMR vs C3 Beta (freq specificity): d=-1.073 [-2.122, -0.025], p=0.0395, p_adj=0.0789, BF01=0.54
+C3 SMR vs C4 SMR (site specificity): d=-1.440 [-2.540, -0.340], p=0.0087, p_adj=0.0262, BF01=0.15
+c3_smr vs Sham: d=-1.331 [-2.260, -0.403], p=0.0043, p_adj=0.0257, BF01=0.10
+c3_beta vs Sham: d=-0.268 [-1.120, 0.584], p=0.5280, p_adj=0.6336, BF01=3.87
+c4_smr vs Sham: d=0.194 [-0.657, 1.044], p=0.6476, p_adj=0.6476, BF01=4.22

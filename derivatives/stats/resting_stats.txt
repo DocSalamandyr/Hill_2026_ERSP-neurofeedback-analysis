@@ -1,0 +1,33 @@
+Resting-State Analysis Summary
+============================================================
+
+
+ECPRE: S6 - S1 Change Scores
+----------------------------------------
+  Resting Δ c3_smr vs sham: d=0.691, p=0.0355, p_adj=0.1064
+  Resting Δ c3_beta vs sham: d=0.208, p=0.4984, p_adj=0.4984
+  Resting Δ c4_smr vs sham: d=0.497, p=0.1254, p_adj=0.1882
+  Resting Δ c3_smr vs sham: d=0.372, p=0.2489, p_adj=0.5308
+  Resting Δ c3_beta vs sham: d=0.255, p=0.4069, p_adj=0.5308
+  Resting Δ c4_smr vs sham: d=0.201, p=0.5308, p_adj=0.5308
+  Resting Δ c3_smr vs sham: d=0.511, p=0.1152, p_adj=0.3457
+  Resting Δ c3_beta vs sham: d=-0.001, p=0.9961, p_adj=0.9961
+  Resting Δ c4_smr vs sham: d=0.245, p=0.4449, p_adj=0.6674
+  Resting Δ c3_smr vs sham: d=0.966, p=0.0041, p_adj=0.0122
+  Resting Δ c3_beta vs sham: d=-0.002, p=0.9952, p_adj=0.9952
+  Resting Δ c4_smr vs sham: d=0.777, p=0.0188, p_adj=0.0283
+
+EOPRE: S6 - S1 Change Scores
+----------------------------------------
+  Resting Δ c3_smr vs sham: d=0.124, p=0.6992, p_adj=0.8565
+  Resting Δ c3_beta vs sham: d=-0.055, p=0.8565, p_adj=0.8565
+  Resting Δ c4_smr vs sham: d=0.316, p=0.3260, p_adj=0.8565
+  Resting Δ c3_smr vs sham: d=0.421, p=0.1926, p_adj=0.3094
+  Resting Δ c3_beta vs sham: d=0.390, p=0.2063, p_adj=0.3094
+  Resting Δ c4_smr vs sham: d=0.265, p=0.4083, p_adj=0.4083
+  Resting Δ c3_smr vs sham: d=0.200, p=0.5329, p_adj=0.5329
+  Resting Δ c3_beta vs sham: d=-0.298, p=0.3333, p_adj=0.4999
+  Resting Δ c4_smr vs sham: d=0.331, p=0.3043, p_adj=0.4999
+  Resting Δ c3_smr vs sham: d=0.306, p=0.3408, p_adj=0.5112
+  Resting Δ c3_beta vs sham: d=0.121, p=0.6938, p_adj=0.6938
+  Resting Δ c4_smr vs sham: d=0.651, p=0.0468, p_adj=0.1403
