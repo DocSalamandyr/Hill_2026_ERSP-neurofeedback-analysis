@@ -3,14 +3,14 @@
 
 Produces two PDFs:
   - manuscript-draft.pdf  (lean main text + 5 figures)
-  - supplement-draft.pdf  (detailed methods, stats, extended results, 8 figures)
+  - supplement-draft.pdf  (detailed methods, stats, extended results, 12 figures)
 """
 
 from pathlib import Path
-import os, subprocess, sys
+import subprocess, sys
 
 ERSP = Path(__file__).resolve().parent.parent
-FIG_DIR = Path(os.environ.get("ERSP_DERIVATIVES_ROOT", "Derivatives")) / "minimal" / "figures"
+FIG_DIR = Path("/path/to/your/ERSP_data/Derivatives/minimal/figures")
 
 TITLE = (
     "Frequency-Specific Operant Learning in Neurofeedback Reveals "
@@ -46,6 +46,7 @@ groups showed lasting plasticity, with increased eyes-closed alpha at follow-up
 accumulation ($\beta = 1.44$, $p = 0.004$). ERD magnitude predicted long-term
 resting-state change ($r = 0.54$, $p = 0.009$) but not within-session shifts
 ($r = -0.09$, $p = 0.67$), dissociating transient from consolidating effects.
+An ICA-based sensitivity analysis confirmed convergence of all primary findings.
 
 \textbf{Conclusions.}
 Neurofeedback engages frequency-specific, contingency-dependent cortical
@@ -99,6 +100,29 @@ SUPP_FIGURES = [
      "Pre-session eyes-closed alpha power at C3 across sessions. "
      "SMR groups show cumulative accumulation; sham and C3 Beta are flat or declining. "
      "Error bars: SEM."),
+    ("source_erd_maps.png", "Figure S11",
+     "Exploratory eLORETA source maps of reward-locked band-specific activity. "
+     "Top row: C3 Beta (15--18 Hz); bottom row: C3 SMR (12--15 Hz). "
+     "Source power is normalized within each group to highlight spatial distribution "
+     "(warm colors = top 30\\% of vertices). C3 Beta shows a more focal pattern "
+     "(Gini = 0.30) while C3 SMR is more distributed (Gini = 0.25). "
+     "Depth-weighting sensitivity: r = 1.000 for both groups across depth = 0.8 and 0.0. "
+     "These visualizations are illustrative; all inferential statistics are reported "
+     "at the sensor level."),
+    ("source_erp_p2_maps.png", "Figure S12",
+     "Exploratory eLORETA source maps of the P2 evoked component (140--260 ms). "
+     "Top row: C3 SMR group; bottom row: C3 Beta group. "
+     "The C3 SMR group shows substantially stronger P2 source activity, consistent with "
+     "the sensor-level double dissociation (Figure 3, Table 1). "
+     "These visualizations are illustrative; all inferential statistics are reported "
+     "at the sensor level."),
+    ("sensitivity_comparison.png", "Figure S13",
+     "Sensitivity analysis: minimal vs ICA preprocessing. "
+     "Left: trial retention scatter plot (each point = one subject $\\times$ session); "
+     "the dashed line indicates equal retention. "
+     "Right: per-group ERD distributions under both pipelines. "
+     "The minimal pipeline produces slightly larger effect sizes despite comparable "
+     "trial counts, consistent with signal preservation (Delorme, 2023)."),
 ]
 
 
@@ -205,6 +229,8 @@ Arnold, L.E., Arns, M., Barterian, J., et al. (2021). Double-blind placebo-contr
 Arns, M., de Ridder, S., Strehl, U., Breteler, M., & Coenen, A. (2009). Efficacy of neurofeedback treatment in ADHD: the effects on inattention, impulsivity and hyperactivity: a meta-analysis. *Clinical EEG and Neuroscience*, 40(3), 180--189.
 
 Cortese, S., Ferrin, M., Brandeis, D., et al. (2016). Neurofeedback for attention-deficit/hyperactivity disorder: meta-analysis of clinical and neuropsychological outcomes from randomized controlled trials. *Journal of the American Academy of Child & Adolescent Psychiatry*, 55(6), 444--455.
+
+Delorme, A. (2023). EEG is better left alone. *Scientific Reports*, 13, 2372.
 
 Dessy, E., Mairesse, O., van Puyvelde, M., Cortoos, A., Neyt, X., & Pattyn, N. (2020). Train your brain? Can we really selectively train specific EEG frequencies with neurofeedback training. *Frontiers in Human Neuroscience*, 14, 22.
 
@@ -315,8 +341,12 @@ def build_main() -> str:
     parts.append(
         "Analysis code is available at "
         "https://github.com/DocSalamandyr/Hill\\_2026\\_ERSP-neurofeedback-analysis. "
+        "Derived data (ERSP matrices, ERP averages, resting-state PSD, and "
+        "statistical outputs) are deposited at [OSF URL]. "
         "The pre-specified analysis plan is posted to OSF. "
-        "Raw EEG data will be shared upon reasonable request.\n\n"
+        "Raw EEG recordings (BioSemi BDF) are available from the corresponding "
+        "author subject to a data use agreement, as the original informed consent "
+        "did not include provisions for unrestricted public sharing.\n\n"
     )
 
     return "".join(parts)

@@ -13,6 +13,7 @@ Usage examples:
   python pipeline.py --stage resting    --subject 101
   python pipeline.py --stage stats      --study-json study.json
   python pipeline.py --stage figures    --study-json study.json
+  python pipeline.py --stage source     --study-json study.json
   python pipeline.py --stage pdf
   python pipeline.py --stage all        --subject 101
 
@@ -1328,6 +1329,48 @@ def stage_trial_log(study_json: str) -> int:
     return 0
 
 
+# ── Source localization (exploratory) ───────────────────────────────────────
+
+
+def stage_source(study_json: str) -> int:
+    """Generate exploratory eLORETA source maps (Figures S11, S12)."""
+    from tools.source import build_forward_model, load_group_epochs
+    from tools.study import Study
+    from tools.viz.source_maps import plot_erd_source_maps, plot_erp_source_maps
+
+    study = Study.from_json(
+        Path(study_json),
+        analyses_root=ANALYSES_ROOT,
+        derivatives_root=DERIVATIVES_ROOT,
+    )
+
+    fig_dir = DERIVATIVES_ROOT / "figures"
+    fig_dir.mkdir(parents=True, exist_ok=True)
+
+    logger.info("Loading epochs for source analysis ...")
+    epochs_by_group = {}
+    for group_key in ("c3_beta", "c3_smr"):
+        epochs_by_group[group_key] = load_group_epochs(
+            study, group_key, sessions=(1, 3, 5),
+        )
+        if not epochs_by_group[group_key]:
+            logger.error("No epochs for %s — cannot proceed", group_key)
+            return 1
+
+    sample_info = epochs_by_group["c3_beta"][0].info
+    logger.info("Building forward model ...")
+    fwd, src = build_forward_model(sample_info)
+
+    logger.info("=== Figure S11: ERD source maps ===")
+    plot_erd_source_maps(epochs_by_group, fwd, fig_dir)
+
+    logger.info("=== Figure S12: P2 evoked source maps ===")
+    plot_erp_source_maps(epochs_by_group, fwd, fig_dir)
+
+    logger.info("Source figures complete — inspect before committing to manuscript")
+    return 0
+
+
 # ── PDF generation ─────────────────────────────────────────────────────────
 
 def stage_pdf() -> int:
@@ -1346,7 +1389,7 @@ def stage_pdf() -> int:
 
 STAGES = (
     "validate", "preprocess", "epochs", "ersp", "erp",
-    "resting", "stats", "figures", "trial_log", "pdf", "all",
+    "resting", "stats", "figures", "trial_log", "source", "pdf", "all",
 )
 
 PER_SUBJECT_STAGES = ("validate", "preprocess", "epochs", "ersp", "erp", "resting")
@@ -1495,6 +1538,7 @@ def main() -> int:
         "stats":      lambda: stage_stats(args.study_json) if args.study_json else _missing_study(),
         "figures":    lambda: stage_figures(args.study_json) if args.study_json else _missing_study(),
         "trial_log":  lambda: stage_trial_log(args.study_json) if args.study_json else _missing_study(),
+        "source":     lambda: stage_source(args.study_json) if args.study_json else _missing_study(),
         "pdf":        lambda: stage_pdf(),
     }
 

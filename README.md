@@ -24,6 +24,7 @@ tools/                     Analysis library
   stats.py                 Statistical tests (LME, permutation, Bayes)
   group.py                 Group-level aggregation
   study.py                 Study metadata and file path management
+  source.py                Source localization (eLORETA) utilities
   io.py                    HDF5 read/write
   viz/                     All figure-generation code
 data/
@@ -59,18 +60,40 @@ See `tools/config.py` for defaults and additional parameters.
 python scripts/pipeline.py --preprocess-mode minimal --stage all \
   --all-subjects --study-json data/study.json
 
+# ICA preprocessing (sensitivity analysis — all 40 subjects):
+python scripts/pipeline.py --preprocess-mode ica --stage all \
+  --all-subjects --study-json data/study.json
+
+# Compare minimal vs ICA effect sizes and trial retention:
+python scripts/sensitivity_comparison.py --study-json data/study.json
+
 # Figures only:
 python scripts/pipeline.py --stage figures --study-json data/study.json
+
+# Source localization figures (exploratory eLORETA):
+python scripts/pipeline.py --stage source --study-json data/study.json
 
 # Rebuild manuscript PDFs:
 python scripts/pipeline.py --stage pdf --study-json data/study.json
 ```
 
+Primary results use the minimal pipeline (high-pass filter + statistical
+artifact rejection). The ICA pipeline (extended Infomax + ICLabel) was run
+on all 40 subjects as a pre-registered sensitivity check. Both pipelines
+converge on the same findings; the minimal pipeline preserves slightly more
+ERD signal (d = −1.23 vs −1.03 for Active vs Sham), consistent with
+Delorme (2023). See manuscript §3.5 and Supplementary S7 for details.
+
 ## Data availability
 
-Raw EEG data (BioSemi BDF files) are available from the author upon
-reasonable request. The data were collected at the University of California,
-Los Angeles under IRB approval.
+Derived data (ERSP matrices, ERP averages, resting-state PSD, and
+statistical outputs; ~215 MB) are deposited at [OSF URL]. These files
+are sufficient to reproduce all statistics and figures in the paper.
+
+Raw EEG recordings (BioSemi BDF, ~36 GB) are available from the
+corresponding author subject to a data use agreement. The data were
+collected at UCLA in 2010–2011 under an IRB protocol that did not
+include provisions for unrestricted public sharing.
 
 ## Citation
 

@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import argparse
 import logging
-import os
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -24,7 +23,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)-20s %(leveln
 logger = logging.getLogger("sensitivity")
 
 BFB_SESSIONS = (1, 3, 5, 6)
-DERIV_ROOT = Path(os.environ.get("ERSP_DERIVATIVES_ROOT", "Derivatives"))
+DERIV_ROOT = Path("/path/to/your/ERSP_data/Derivatives")
 
 
 def load_trial_log(mode: str) -> pd.DataFrame:
@@ -64,7 +63,7 @@ def main():
     from tools.study import Study
     study = Study.from_json(
         Path(args.study_json),
-        analyses_root=Path(os.environ.get("ERSP_ANALYSES_ROOT", "Analyses")) / "minimal",
+        analyses_root=Path("/path/to/your/ERSP_data/Analyses/minimal"),
         derivatives_root=DERIV_ROOT / "minimal",
     )
 
