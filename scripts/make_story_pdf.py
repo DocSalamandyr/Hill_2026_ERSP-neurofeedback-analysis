@@ -100,23 +100,14 @@ SUPP_FIGURES = [
      "Pre-session eyes-closed alpha power at C3 across sessions. "
      "SMR groups show cumulative accumulation; sham and C3 Beta are flat or declining. "
      "Error bars: SEM."),
-    ("source_erd_maps.png", "Figure S11",
-     "Exploratory eLORETA source maps of reward-locked band-specific activity. "
-     "Top row: C3 Beta (15--18 Hz); bottom row: C3 SMR (12--15 Hz). "
-     "Source power is normalized within each group to highlight spatial distribution "
-     "(warm colors = top 30\\% of vertices). C3 Beta shows a more focal pattern "
-     "(Gini = 0.30) while C3 SMR is more distributed (Gini = 0.25). "
-     "Depth-weighting sensitivity: r = 1.000 for both groups across depth = 0.8 and 0.0. "
-     "These visualizations are illustrative; all inferential statistics are reported "
-     "at the sensor level."),
-    ("source_erp_p2_maps.png", "Figure S12",
+    ("source_erp_p2_maps.png", "Figure S11",
      "Exploratory eLORETA source maps of the P2 evoked component (140--260 ms). "
      "Top row: C3 SMR group; bottom row: C3 Beta group. "
      "The C3 SMR group shows substantially stronger P2 source activity, consistent with "
      "the sensor-level double dissociation (Figure 3, Table 1). "
      "These visualizations are illustrative; all inferential statistics are reported "
      "at the sensor level."),
-    ("sensitivity_comparison.png", "Figure S13",
+    ("sensitivity_comparison.png", "Figure S12",
      "Sensitivity analysis: minimal vs ICA preprocessing. "
      "Left: trial retention scatter plot (each point = one subject $\\times$ session); "
      "the dashed line indicates equal retention. "
@@ -342,7 +333,7 @@ def build_main() -> str:
         "Analysis code is available at "
         "https://github.com/DocSalamandyr/Hill\\_2026\\_ERSP-neurofeedback-analysis. "
         "Derived data (ERSP matrices, ERP averages, resting-state PSD, and "
-        "statistical outputs) are deposited at [OSF URL]. "
+        "statistical outputs) are deposited at https://doi.org/10.5281/zenodo.19555777. "
         "The pre-specified analysis plan is posted to OSF. "
         "Raw EEG recordings (BioSemi BDF) are available from the corresponding "
         "author subject to a data use agreement, as the original informed consent "

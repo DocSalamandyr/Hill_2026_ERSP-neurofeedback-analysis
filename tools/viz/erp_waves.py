@@ -64,12 +64,9 @@ def plot_erp_waveforms(
         for si, slabel in enumerate(sessions_shown):
             ax = axes[ci, si]
 
-            # Shade component windows
+            # Shade component windows (convert s → ms)
             for comp_name, (t0, t1), color in comp_windows:
-                ax.axvspan(t0, t1, color=color, alpha=0.2, zorder=0)
-                if ci == 0 and si == 0:
-                    ax.text((t0 + t1) / 2, ax.get_ylim()[1] if ax.get_ylim()[1] != 1 else 5,
-                            comp_name, ha="center", fontsize=7, color="0.3")
+                ax.axvspan(t0 * 1000, t1 * 1000, color=color, alpha=0.2, zorder=0)
 
             for gkey in GROUP_ORDER:
                 data = erp_data.get(gkey, {}).get(slabel)
@@ -87,6 +84,13 @@ def plot_erp_waveforms(
                 ax.set_ylabel(f"{ch}\nAmplitude (µV)", fontsize=8)
             if ci == n_channels - 1:
                 ax.set_xlabel("Time (ms)", fontsize=8)
+
+    # Place component labels in top-left panel after y-limits are set
+    ax0 = axes[0, 0]
+    ymax = ax0.get_ylim()[1]
+    for comp_name, (t0, t1), color in comp_windows:
+        ax0.annotate(comp_name, xy=((t0 + t1) / 2 * 1000, ymax * 0.85),
+                     ha="center", va="top", fontsize=7, color="0.3")
 
     axes[0, 0].legend(loc="upper right", fontsize=7, framealpha=0.9)
     fig.tight_layout()
