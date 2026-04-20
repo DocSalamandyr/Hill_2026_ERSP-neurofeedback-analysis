@@ -38,7 +38,7 @@ four sessions.
 \textbf{Results.}
 Active groups produced frequency-specific event-related desynchronization (ERD) in
 the rewarded band (Active vs Sham $d = -1.23$,
-$p_{\mathrm{adj}} = 0.001$), absent in sham. A double dissociation emerged at C3:
+$p_{\mathrm{adj}} = 0.001$), absent in sham. A pattern consistent with a double dissociation emerged at C3:
 beta training produced the strongest ERD ($d = -2.38$), whereas SMR training
 produced the strongest P2 ERP ($d = -1.33$, $\mathrm{BF}_{01} = 0.10$). Only SMR
 groups showed lasting plasticity, with increased eyes-closed alpha at follow-up
@@ -50,8 +50,8 @@ An ICA-based sensitivity analysis confirmed convergence of all primary findings.
 
 \textbf{Conclusions.}
 Neurofeedback engages frequency-specific, contingency-dependent cortical
-mechanisms. The ERD--P2 double dissociation indicates that SMR and beta training
-recruit distinct circuits---thalamocortical versus local cortical---with different
+mechanisms. The ERD--P2 dissociation suggests that SMR and beta training
+may recruit distinct circuits---potentially thalamocortical versus local cortical---with different
 capacities for consolidation. These findings establish a multi-timescale model in
 which immediate reward-locked desynchronization drives durable plasticity only when
 supported by deeper circuit dynamics.
@@ -100,14 +100,7 @@ SUPP_FIGURES = [
      "Pre-session eyes-closed alpha power at C3 across sessions. "
      "SMR groups show cumulative accumulation; sham and C3 Beta are flat or declining. "
      "Error bars: SEM."),
-    ("source_erp_p2_maps.png", "Figure S11",
-     "Exploratory eLORETA source maps of the P2 evoked component (140--260 ms). "
-     "Top row: C3 SMR group; bottom row: C3 Beta group. "
-     "The C3 SMR group shows substantially stronger P2 source activity, consistent with "
-     "the sensor-level double dissociation (Figure 3, Table 1). "
-     "These visualizations are illustrative; all inferential statistics are reported "
-     "at the sensor level."),
-    ("sensitivity_comparison.png", "Figure S12",
+    ("sensitivity_comparison.png", "Figure S11",
      "Sensitivity analysis: minimal vs ICA preprocessing. "
      "Left: trial retention scatter plot (each point = one subject $\\times$ session); "
      "the dashed line indicates equal retention. "
@@ -213,7 +206,7 @@ def extract_discussion(text: str) -> str:
 
 
 REFERENCES = r"""
-Arnold, L.E., Lofthouse, N., Herber, S., et al. (2013). EEG neurofeedback for ADHD: Double-blind sham-controlled randomized pilot feasibility trial. *Journal of Attention Disorders*, 17(5), 410--419.
+Arnold, L.E., Lofthouse, N., Hersch, S., et al. (2013). EEG neurofeedback for ADHD: Double-blind sham-controlled randomized pilot feasibility trial. *Journal of Attention Disorders*, 17(5), 410--419.
 
 Arnold, L.E., Arns, M., Barterian, J., et al. (2021). Double-blind placebo-controlled randomized clinical trial of neurofeedback for attention-deficit/hyperactivity disorder with 13-month follow-up. *Journal of the American Academy of Child & Adolescent Psychiatry*, 60(7), 841--855.
 
@@ -251,8 +244,6 @@ Pfurtscheller, G., & Lopes da Silva, F.H. (1999). Event-related EEG/MEG synchron
 
 Ros, T., Munneke, M.A., Ruge, D., Gruzelier, J.H., & Rothwell, J.C. (2010). Endogenous control of waking brain rhythms induces neuroplasticity in humans. *European Journal of Neuroscience*, 31(4), 770--778.
 
-Ros, T., Théberge, J., Bhatt, P., et al. (2013). Neurofeedback: A biobehavioural approach to treatment of posttraumatic stress disorder. *Neuropsychopharmacology*, 38(4), 723--729.
-
 Ros, T., Enriquez-Geppert, S., Zotev, V., et al. (2020). Consensus on the reporting and experimental design of clinical and cognitive-behavioural neurofeedback studies (CRED-nf checklist). *Brain*, 143(6), 1674--1685.
 
 Salansky, N., et al. (2024). Sensori-motor neurofeedback improves inhibitory control and induces neural changes: a placebo-controlled, double-blind, event-related potentials study. *International Journal of Clinical and Health Psychology*.
@@ -273,9 +264,9 @@ Sterman, M.B. (2000). Basic concepts and clinical findings in the treatment of s
 
 Tallon-Baudry, C., Bertrand, O., Delpuech, C., & Pernier, J. (1996). Stimulus specificity of phase-locked and non-phase-locked 40 Hz visual responses in human. *Journal of Neuroscience*, 16(13), 4240--4249.
 
-Thibault, R.T., Lifshitz, M., & Raz, A. (2016). The self-regulating brain and neurofeedback: Fact and fantasy. *Neuroscience & Biobehavioral Reviews*, 69, 60--82.
+Thibault, R.T., Lifshitz, M., & Raz, A. (2016). The self-regulating brain and neurofeedback: Experimental science and clinical promise. *Cortex*, 74, 247--261.
 
-Thibault, R.T., & Raz, A. (2017). The psychology of neurofeedback: Perception, placebo, and the unknown. *Journal of Clinical and Experimental Neuropsychology*, 39(8), 773--788.
+Thibault, R.T., & Raz, A. (2017). The psychology of neurofeedback: Clinical intervention even if applied placebo. *American Psychologist*, 72(7), 679--688.
 
 Van Doren, J., Arns, M., Heinrich, H., Vollebregt, M.A., Strehl, U., & Loo, S.K. (2019). Sustained effects of neurofeedback in ADHD: a systematic review and meta-analysis. *European Child & Adolescent Psychiatry*, 28(3), 293--305.
 """.strip()

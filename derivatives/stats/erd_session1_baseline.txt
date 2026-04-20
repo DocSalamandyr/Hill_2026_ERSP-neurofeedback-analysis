@@ -1,0 +1,15 @@
+ERD Session 1 Baseline ANOVA at C3
+============================================================
+
+N = 40 subjects, 4 groups
+Groups: {'sham': 16, 'c4_smr': 8, 'c3_smr': 8, 'c3_beta': 8}
+
+One-way ANOVA: F(3,36) = 4.715, p = 0.0071, ηp² = 0.2821
+
+Per-group descriptives:
+             mean       std  count
+group                             
+c3_beta -1.259799  0.318448      8
+c3_smr  -0.822314  0.552469      8
+c4_smr  -0.882889  0.377583      8
+sham    -0.588074  0.396486     16

@@ -13,6 +13,8 @@ scripts/
   pipeline.py              Main analysis pipeline (preprocessing, stats, figures)
   make_story_pdf.py        Assemble manuscript + supplement PDFs
   sensitivity_comparison.py  ICA vs minimal preprocessing comparison
+  session1_p2_anova.py     Session 1 P2 baseline ANOVA (§S3.9)
+  session1_erd_anova.py    Session 1 ERD baseline ANOVA (§S3.10)
   requirements.txt         Python dependencies
 tools/                     Analysis library
   config.py                Paths, frequency bands, statistical parameters
@@ -24,6 +26,7 @@ tools/                     Analysis library
   stats.py                 Statistical tests (LME, permutation, Bayes)
   group.py                 Group-level aggregation
   study.py                 Study metadata and file path management
+  prs.py                   Post-reinforcement synchronization analysis
   source.py                Source localization (eLORETA) utilities
   io.py                    HDF5 read/write
   viz/                     All figure-generation code
@@ -77,9 +80,6 @@ python scripts/sensitivity_comparison.py --study-json data/study.json
 # Figures only:
 python scripts/pipeline.py --stage figures --study-json data/study.json
 
-# Source localization figures (exploratory eLORETA):
-python scripts/pipeline.py --stage source --study-json data/study.json
-
 # Rebuild manuscript PDFs:
 python scripts/pipeline.py --stage pdf --study-json data/study.json
 ```
@@ -89,7 +89,7 @@ artifact rejection). The ICA pipeline (extended Infomax + ICLabel) was run
 on all 40 subjects as a pre-registered sensitivity check. Both pipelines
 converge on the same findings; the minimal pipeline preserves slightly more
 ERD signal (d = −1.23 vs −1.03 for Active vs Sham), consistent with
-Delorme (2023). See manuscript §3.5 and Supplementary S7 for details.
+Delorme (2023). See manuscript §3.5 and Supplementary S6 for details.
 
 ## Data availability
 

@@ -10,8 +10,10 @@ Usage examples:
   python pipeline.py --stage epochs     --subject 101
   python pipeline.py --stage ersp       --subject 101
   python pipeline.py --stage erp        --subject 101
+  python pipeline.py --stage prs        --subject 101
   python pipeline.py --stage resting    --subject 101
   python pipeline.py --stage stats      --study-json study.json
+  python pipeline.py --stage prs_stats  --study-json study.json
   python pipeline.py --stage figures    --study-json study.json
   python pipeline.py --stage source     --study-json study.json
   python pipeline.py --stage pdf
@@ -265,6 +267,316 @@ def stage_ersp(subject: str, sessions: Sequence[int],
             subject, sess, result.n_trials,
             result.scalars.get("primary_erd_C3", float("nan")),
         )
+    return 0
+
+
+# ── prs ────────────────────────────────────────────────────────────────────
+
+
+def stage_prs(subject: str, sessions: Sequence[int]) -> int:
+    """Compute post-reinforcement synchronization scalars from saved epochs.
+
+    Pre-specified in ``audit/PRS_ANALYSIS.md``. Reuses the existing
+    reward-locked epochs; does not re-preprocess or re-epoch.
+    """
+    import mne
+    from tools.prs import PRS_CHANNELS, compute_prs, save_prs
+
+    for sess in sessions:
+        epo_path = ANALYSES_ROOT / subject / "epochs" / f"{subject}_BFB_{sess}_reward-epo.fif"
+        if not epo_path.is_file():
+            logger.error("Epochs file missing: %s", epo_path)
+            continue
+
+        epochs = mne.read_epochs(epo_path, preload=True, verbose="WARNING")
+        if len(epochs) == 0:
+            logger.warning("Empty epochs for %s session %d — skipping PRS", subject, sess)
+            continue
+
+        result = compute_prs(
+            epochs, cfg=ERSP_CFG,
+            subject=subject, session=sess,
+            channel_picks=list(PRS_CHANNELS),
+        )
+
+        out_path = DERIVATIVES_ROOT / subject / "prs" / f"{subject}_BFB_{sess}_prs.h5"
+        save_prs(result, out_path)
+        logger.info(
+            "PRS %s session %d: %d trials, prs_alpha_Pz=%.3f dB",
+            subject, sess, result.n_trials,
+            result.scalars.get("prs_alpha_Pz", float("nan")),
+        )
+    return 0
+
+
+def stage_prs_stats(study_json: str) -> int:
+    """Group-level PRS contrasts (pooled Active vs Sham, per-group vs Sham,
+    SMR-vs-Beta linear contrast, ERD–PRS correlation, LME, and cluster
+    permutation at Pz). Writes ``prs_group_stats.json`` under
+    ``DERIVATIVES_ROOT / prs``.
+    """
+    import json
+    from tools.prs import load_prs
+    from tools.study import Study
+
+    study = Study.from_json(
+        Path(study_json),
+        analyses_root=ANALYSES_ROOT,
+        derivatives_root=DERIVATIVES_ROOT,
+    )
+    subjects = study.included()
+
+    subject_rows: list[dict] = []
+    tfrs_Pz: list[np.ndarray] = []  # type: ignore[name-defined]
+    tfr_meta: list[dict] = []
+    freqs_ref = None
+    times_ref = None
+
+    import numpy as np
+
+    for subj in subjects:
+        per_session_scalars: dict[str, list[float]] = {}
+        per_session_pz_tfrs: list[np.ndarray] = []
+        n_sessions_loaded = 0
+
+        for sess in (1, 3, 5, 6):
+            path = DERIVATIVES_ROOT / subj.subject_id / "prs" / f"{subj.subject_id}_BFB_{sess}_prs.h5"
+            if not path.is_file():
+                continue
+            r = load_prs(path)
+            n_sessions_loaded += 1
+            for k, v in r.scalars.items():
+                per_session_scalars.setdefault(k, []).append(v)
+
+            if "Pz" in r.channel_names:
+                pz_idx = r.channel_names.index("Pz")
+                per_session_pz_tfrs.append(r.ersp[pz_idx])
+                if freqs_ref is None:
+                    freqs_ref = r.freqs
+                    times_ref = r.times
+
+        if n_sessions_loaded == 0:
+            continue
+
+        row = {
+            "subject": subj.subject_id,
+            "group": subj.group,
+            "n_sessions": n_sessions_loaded,
+        }
+        for k, vals in per_session_scalars.items():
+            vals_f = [v for v in vals if not np.isnan(v)]
+            row[k] = float(np.mean(vals_f)) if vals_f else float("nan")
+        subject_rows.append(row)
+
+        if per_session_pz_tfrs:
+            tfrs_Pz.append(np.mean(np.stack(per_session_pz_tfrs, axis=0), axis=0))
+            tfr_meta.append({"subject": subj.subject_id, "group": subj.group})
+
+    def _vals(rows: list[dict], key: str, groups: tuple[str, ...] | None = None) -> np.ndarray:
+        if groups is None:
+            filtered = rows
+        else:
+            filtered = [r for r in rows if r["group"] in groups]
+        vals = [r.get(key, float("nan")) for r in filtered]
+        vals = np.array([v for v in vals if not np.isnan(v)], dtype=float)
+        return vals
+
+    from scipy import stats as spstats
+
+    def _welch(a: np.ndarray, b: np.ndarray) -> dict:
+        if len(a) < 2 or len(b) < 2:
+            return {"n_a": int(len(a)), "n_b": int(len(b)), "t": float("nan"),
+                    "df": float("nan"), "p": float("nan"), "d": float("nan")}
+        t, p = spstats.ttest_ind(a, b, equal_var=False)
+        sa, sb = a.std(ddof=1), b.std(ddof=1)
+        na, nb = len(a), len(b)
+        s_pooled = np.sqrt(((na - 1) * sa ** 2 + (nb - 1) * sb ** 2) / (na + nb - 2))
+        d = float((a.mean() - b.mean()) / s_pooled) if s_pooled > 0 else float("nan")
+        df_welch = ((sa ** 2 / na + sb ** 2 / nb) ** 2) / (
+            ((sa ** 2 / na) ** 2) / (na - 1) + ((sb ** 2 / nb) ** 2) / (nb - 1)
+        ) if sa > 0 and sb > 0 else float("nan")
+        return {"n_a": int(na), "n_b": int(nb), "t": float(t), "df": float(df_welch),
+                "p": float(p), "d": d, "mean_a": float(a.mean()), "mean_b": float(b.mean()),
+                "sd_a": float(sa), "sd_b": float(sb)}
+
+    from tools.stats import bayes_factor_ttest
+
+    def _bf01_two_sample(a: np.ndarray, b: np.ndarray) -> float:
+        if len(a) < 2 or len(b) < 2:
+            return float("nan")
+        return float(bayes_factor_ttest(a, b, paired=False))
+
+    def _bf01_one_sample(a: np.ndarray) -> float:
+        if len(a) < 2:
+            return float("nan")
+        return float(bayes_factor_ttest(a, b=None, paired=False))
+
+    def _fdr_bh(pvals: list[float]) -> list[float]:
+        p = np.array(pvals, dtype=float)
+        n = len(p)
+        order = np.argsort(p)
+        ranked = p[order]
+        adj = ranked * n / (np.arange(n) + 1)
+        adj = np.minimum.accumulate(adj[::-1])[::-1]
+        out = np.empty(n)
+        out[order] = adj
+        return [float(x) for x in out]
+
+    ACTIVE_GROUPS = ("c3_smr", "c3_beta", "c4_smr")
+    SMR_GROUPS = ("c3_smr", "c4_smr")
+
+    results: dict = {"n_subjects_loaded": len(subject_rows),
+                     "channels": ["Pz", "P3", "P4", "POz", "PO3", "PO4", "Fz"],
+                     "band_alpha_hz": [8.0, 12.0],
+                     "window_ms": [800, 1500],
+                     "baseline_ms": [-100, 0]}
+
+    descriptives: dict = {}
+    for grp in ("c3_smr", "c3_beta", "c4_smr", "sham"):
+        v = _vals(subject_rows, "prs_alpha_Pz", (grp,))
+        descriptives[grp] = {
+            "n": int(len(v)),
+            "prs_alpha_Pz_mean": float(v.mean()) if len(v) else float("nan"),
+            "prs_alpha_Pz_sd": float(v.std(ddof=1)) if len(v) > 1 else float("nan"),
+        }
+    results["descriptives_Pz"] = descriptives
+
+    contrasts: dict = {}
+    active_pz = _vals(subject_rows, "prs_alpha_Pz", ACTIVE_GROUPS)
+    sham_pz = _vals(subject_rows, "prs_alpha_Pz", ("sham",))
+    pooled = _welch(active_pz, sham_pz)
+    pooled["bf01"] = _bf01_two_sample(active_pz, sham_pz)
+    contrasts["pooled_active_vs_sham_Pz"] = pooled
+
+    per_group = {}
+    ps = []
+    keys = []
+    for grp in ACTIVE_GROUPS:
+        v = _vals(subject_rows, "prs_alpha_Pz", (grp,))
+        res = _welch(v, sham_pz)
+        res["bf01"] = _bf01_two_sample(v, sham_pz)
+        per_group[f"{grp}_vs_sham_Pz"] = res
+        ps.append(res["p"]); keys.append(f"{grp}_vs_sham_Pz")
+    p_adj = _fdr_bh(ps)
+    for k, pa in zip(keys, p_adj):
+        per_group[k]["p_adj"] = pa
+    contrasts["per_group_vs_sham_Pz"] = per_group
+
+    smr_group_mean = _vals(subject_rows, "prs_alpha_Pz", SMR_GROUPS)
+    beta_group = _vals(subject_rows, "prs_alpha_Pz", ("c3_beta",))
+    contrasts["smr_vs_beta_Pz"] = _welch(smr_group_mean, beta_group)
+    contrasts["smr_vs_beta_Pz"]["bf01"] = _bf01_two_sample(smr_group_mean, beta_group)
+
+    def _one_sample(a: np.ndarray) -> dict:
+        if len(a) < 2:
+            return {"n": int(len(a)), "t": float("nan"), "p": float("nan"),
+                    "mean": float("nan"), "sd": float("nan"), "bf01": float("nan")}
+        t, p = spstats.ttest_1samp(a, 0.0)
+        return {"n": int(len(a)), "t": float(t), "p": float(p),
+                "mean": float(a.mean()), "sd": float(a.std(ddof=1)),
+                "bf01": _bf01_one_sample(a)}
+
+    one_sample = {grp: _one_sample(_vals(subject_rows, "prs_alpha_Pz", (grp,)))
+                  for grp in ("c3_smr", "c3_beta", "c4_smr", "sham")}
+    contrasts["one_sample_vs_zero_Pz"] = one_sample
+
+    erd_vals, prs_vals = [], []
+    for r in subject_rows:
+        if r["group"] not in ACTIVE_GROUPS:
+            continue
+        erd_key = "primary_erd_C4" if r["group"] == "c4_smr" else "primary_erd_C3"
+        ersp_path = DERIVATIVES_ROOT / r["subject"] / "ersp"
+        erd_subj = []
+        if ersp_path.is_dir():
+            for sess in (1, 3, 5, 6):
+                p = ersp_path / f"{r['subject']}_BFB_{sess}_ersp.h5"
+                if not p.is_file():
+                    continue
+                import h5py
+                with h5py.File(p, "r") as fh:
+                    key = f"scalar/{erd_key}"
+                    if key in fh.attrs:
+                        v = float(fh.attrs[key])
+                        if not np.isnan(v):
+                            erd_subj.append(v)
+        if erd_subj and not np.isnan(r.get("prs_alpha_Pz", float("nan"))):
+            erd_vals.append(np.mean(erd_subj))
+            prs_vals.append(r["prs_alpha_Pz"])
+    if len(erd_vals) >= 3:
+        pearson_r, pearson_p = spstats.pearsonr(erd_vals, prs_vals)
+        spearman_r, spearman_p = spstats.spearmanr(erd_vals, prs_vals)
+        contrasts["erd_prs_correlation_active"] = {
+            "n": int(len(erd_vals)),
+            "pearson_r": float(pearson_r), "pearson_p": float(pearson_p),
+            "spearman_r": float(spearman_r), "spearman_p": float(spearman_p),
+        }
+    else:
+        contrasts["erd_prs_correlation_active"] = {"n": int(len(erd_vals)),
+                                                     "note": "insufficient data"}
+
+    results["contrasts_Pz"] = contrasts
+
+    active_fz = _vals(subject_rows, "prs_alpha_Fz", ACTIVE_GROUPS)
+    sham_fz = _vals(subject_rows, "prs_alpha_Fz", ("sham",))
+    control_fz_pooled = _welch(active_fz, sham_fz)
+    control_fz_pooled["bf01"] = _bf01_two_sample(active_fz, sham_fz)
+    results["control_Fz_pooled_active_vs_sham"] = control_fz_pooled
+
+    cluster_result = {"status": "not-run"}
+    if tfrs_Pz and freqs_ref is not None and times_ref is not None:
+        try:
+            from mne.stats import permutation_cluster_test
+            tfrs_arr = np.stack(tfrs_Pz, axis=0)  # (n_subjects, n_freqs, n_times)
+            groups_arr = np.array([m["group"] for m in tfr_meta])
+            active_mask = np.isin(groups_arr, ACTIVE_GROUPS)
+            sham_mask = groups_arr == "sham"
+            if active_mask.sum() >= 2 and sham_mask.sum() >= 2:
+                t_win = (times_ref >= 0.0) & (times_ref <= 1.5)
+                f_win = (freqs_ref >= 3.0) & (freqs_ref <= 20.0)
+                a_tfr = tfrs_arr[np.ix_(active_mask, f_win, t_win)]
+                s_tfr = tfrs_arr[np.ix_(sham_mask, f_win, t_win)]
+                T_obs, clusters, cluster_pv, _ = permutation_cluster_test(
+                    [a_tfr, s_tfr], n_permutations=1000, threshold=2.0,
+                    tail=1, n_jobs=1, verbose="WARNING",
+                    out_type="mask",
+                )
+                cluster_result = {
+                    "status": "ok",
+                    "n_clusters": int(len(clusters)),
+                    "cluster_pvalues": [float(p) for p in cluster_pv],
+                    "min_cluster_p": (float(min(cluster_pv)) if len(cluster_pv) else float("nan")),
+                    "window_ms": [0, 1500], "freq_hz": [3, 20],
+                    "tail": "one-sided (active > sham)",
+                    "threshold_t": 2.0, "n_permutations": 1000,
+                    "n_subjects_active": int(active_mask.sum()),
+                    "n_subjects_sham": int(sham_mask.sum()),
+                }
+            else:
+                cluster_result = {"status": "insufficient-subjects"}
+        except Exception as e:  # noqa: BLE001
+            logger.warning("Cluster permutation at Pz failed: %s", e)
+            cluster_result = {"status": f"failed: {e}"}
+    results["cluster_permutation_Pz"] = cluster_result
+
+    out_dir = DERIVATIVES_ROOT / "prs"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    out_json = out_dir / "prs_group_stats.json"
+    with open(out_json, "w") as f:
+        json.dump({"subjects": subject_rows, **results}, f, indent=2)
+    logger.info("PRS group stats written: %s", out_json)
+
+    if tfrs_Pz and freqs_ref is not None and times_ref is not None:
+        import h5py
+        tfr_path = out_dir / "prs_Pz_tfrs.h5"
+        with h5py.File(tfr_path, "w") as f:
+            f.create_dataset("tfrs", data=np.stack(tfrs_Pz, axis=0))
+            f.create_dataset("freqs", data=freqs_ref)
+            f.create_dataset("times", data=times_ref)
+            f.attrs["subjects"] = [m["subject"] for m in tfr_meta]
+            f.attrs["groups"] = [m["group"] for m in tfr_meta]
+        logger.info("PRS Pz TFRs written: %s", tfr_path)
+
     return 0
 
 
@@ -1388,8 +1700,8 @@ def stage_pdf() -> int:
 
 
 STAGES = (
-    "validate", "preprocess", "epochs", "ersp", "erp",
-    "resting", "stats", "figures", "trial_log", "source", "pdf", "all",
+    "validate", "preprocess", "epochs", "ersp", "erp", "prs",
+    "resting", "stats", "prs_stats", "figures", "trial_log", "source", "pdf", "all",
 )
 
 PER_SUBJECT_STAGES = ("validate", "preprocess", "epochs", "ersp", "erp", "resting")
@@ -1408,6 +1720,7 @@ def _run_subject_pipeline(
         "epochs":     lambda: stage_epochs(subject_id, sessions),
         "ersp":       lambda: stage_ersp(subject_id, sessions, reward_band),
         "erp":        lambda: stage_erp(subject_id, sessions),
+        "prs":        lambda: stage_prs(subject_id, sessions),
         "resting":    lambda: stage_resting(subject_id, sessions),
     }
     for name in stages:
@@ -1435,6 +1748,10 @@ def _check_prerequisites(subject: str, stage: str) -> bool:
         "erp": lambda: (
             ANALYSES_ROOT / subject / "preprocessed"
             / f"{subject}_BFB_1_clean-raw.fif"
+        ).is_file(),
+        "prs": lambda: (
+            ANALYSES_ROOT / subject / "epochs"
+            / f"{subject}_BFB_1_reward-epo.fif"
         ).is_file(),
     }
     check = checks.get(stage)
@@ -1534,8 +1851,10 @@ def main() -> int:
         "epochs":     lambda: stage_epochs(args.subject, sessions),
         "ersp":       lambda: stage_ersp(args.subject, sessions, args.reward_band),
         "erp":        lambda: stage_erp(args.subject, sessions),
+        "prs":        lambda: stage_prs(args.subject, sessions),
         "resting":    lambda: stage_resting(args.subject, sessions),
         "stats":      lambda: stage_stats(args.study_json) if args.study_json else _missing_study(),
+        "prs_stats":  lambda: stage_prs_stats(args.study_json) if args.study_json else _missing_study(),
         "figures":    lambda: stage_figures(args.study_json) if args.study_json else _missing_study(),
         "trial_log":  lambda: stage_trial_log(args.study_json) if args.study_json else _missing_study(),
         "source":     lambda: stage_source(args.study_json) if args.study_json else _missing_study(),
